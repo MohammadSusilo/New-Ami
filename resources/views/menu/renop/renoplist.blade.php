@@ -1,0 +1,85 @@
+                    @foreach($data as $key=>$faqs)
+                      <tr> 
+                        <td>{{ ++$key }}</td>
+                        
+                        <!--@foreach($data1 as $kinerjas)-->
+                        <!--  @if($kinerjas->renop_id == $faqs->id)-->
+                        <!--    <td><a href="{{ route('kinerjaUnit.get', $kinerjas->id) }}">{{ $faqs->kode }}</a></td>-->
+                        <!--  @else-->
+                        <!--    <td>{{ $faqs->kode }}</td>-->
+                        <!--  @endif-->
+                        <!--@endforeach-->
+                        <td>{{ $faqs->kode }}</td> 
+                        <td>{{ $faqs->unit_target }}</td>
+                        <td>{{ $faqs->target }}</td>
+                        <td>{{ $faqs->tahun }}</td>
+                        <td>
+                            <span class="badge badge-pill badge-info">{{ $faqs->jenis }}</span>
+                        </td>
+                        <td>
+                            @if($faqs->status == "aktif")
+                                <span class="badge badge-pill badge-success">Aktif</span>
+                            @else
+                                <span class="badge badge-pill badge-danger">Tidak Aktif<span>
+                            @endif
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <div style="margin:5px">
+                              <!-- Show -->
+                              <a href="{{ route('renop.show', $faqs->renop_id) }}">
+                                  <button class="button btn btn-link btn-outline-secondary is-small is-info" data-toggle="tooltip" data-original-title="Lihat Pengguna"><i class="fa fa-eye"></i></button>
+                              </a>
+                            </div>
+                            @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 3 )
+                            <div style="margin:5px">
+                              <!-- Edit -->
+                              <a href="{{ route('renop.edit', $faqs->renop_id) }}">
+                                  <button class="button btn btn-link btn-outline-warning is-small is-info" data-toggle="tooltip" data-original-title="Ubah Pengguna"><i class="fa fa-edit"></i></button>
+                              </a>
+                            </div>
+                            <div style="margin:5px">
+                              <!-- Destroy -->
+                              <!-- <form onclick="return confirm('Apakah anda yakin hapus data ini?');" action="{{ route('renop.destroy', $faqs->renop_id) }}" method="POST" class="is-inline">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button class="button btn btn-link btn-outline-danger is-small is-info" data-toggle="tooltip" data- original-title="Hapus Rule"><i class="fa fa-times"></i></button>
+                              </form> -->
+
+                              <button type="button" class="btn btn-link btn-outline-danger is-small is-info" data-toggle="modal" data-target="#deleteRenop{{ $faqs->renop_id}}">
+                                  <i class="fa fa-times"></i>
+                              </button>
+
+                              <div class="modal fade" id="deleteRenop{{ $faqs->renop_id}}">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h4 class="modal-title">Hapus Renop</h4>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <form action="{{ route('renop.destroy', $faqs->renop_id) }}" method="POST" class="is-inline">
+                                                  @csrf
+                                                  @method('DELETE')
+                                                  <p style="text-align: center;">Apakah anda yakin hapus data Renop : {{ $faqs->kode }} !!!</p>
+                                                  <center>
+                                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+                                                      <button type="submit" class="btn btn-success">Iya</button>
+                                                  </center>
+                                              </form>
+                                          </div>
+                                      </div>
+                                      <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                              </div>
+                              <!-- /.modal -->
+
+                            </div>
+                            @endif
+                          </div>
+                        </td>
+                      </tr>
+                    @endforeach

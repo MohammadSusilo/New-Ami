@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Laporan Audit Mutu Internal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <style type="text/css">
+      div {
+        margin: 70px;
+      }
+
+      table tr td,
+      table tr th{
+        font-size: 9pt;
+      }
+    </style>
+    <div>
+      <table class="table" border="0">
+        <thead border="0">
+          <tr border="0">
+            <th rowspan="4">LOGO</th>
+            <th>FORMULIR PROSEDUR AKADEMIK</th>
+            <th>No</th>
+            <th>FPAk.2.01.L.4</th>
+          </tr>
+          <tr>
+            <th rowspan="3" style="vertical-align:center"><h1>LAPORAN AUDIT MUTU INTERNAL</h1></th>
+            <th>Revisi</th>
+            <th>3</th>
+          </tr>
+          <tr>
+            <th>Tanggal</th>
+            <th>21.12.2017</th>
+          </tr>
+          <tr>
+            <th>Halaman</th>
+            <th>1/1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="4">
+              <center>
+                <h4>Membuat Laporan PDF Dengan DOMPDF Laravel</h4>
+              </center>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Auditee :
+              <li>1</li>
+              <li>2</li>
+            </td>
+            <td colspan="2">
+              Tanda Tangan :
+              <li>1</li>
+              <li>2</li>
+            </td>
+            <td>
+              Tanda Tangan : 21.12.2017
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              Auditor :
+              <li>1</li>
+              <li>2</li>
+            </td>
+            <td>
+              Halaman : 1
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <table class='table table-bordered'>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Standar</th>
+                    <th>Uraian Temuan</th>
+                    <th>Kategori Temuan (NC/AOC/OFI)</th>
+                    <th>Saran Perbaikan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($auditReports as $key=>$value)
+                    <tr>
+                      <td>{{ ++ $key }}</td>
+                      <td>{{ $value->standar }}</td>
+                      <td>{{ $value->uraianTemuan }}</td>
+                      <td>{{ $value->kategoriTemuan }}</td>
+                      <td>{{ $value->saranPerbaikan }}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <tbody>
+              <tr>
+                <td>NC (Non-Conformity)</td>
+                <td colspan="3">adalah temuan yang bersifat ketidaksesuaian mayor, yaitu temuan-temuan yang memiliki dampak 
+                  luas/kritikal terhadap persyaratan mutu produk/pelayanan dan persyaratan sistem manajemen mutu
+                  Contoh : Pelanggaran sistem secara total (sistem tidak dilaksanakan)</td>
+              </tr>
+              <tr>
+                <td>AOC (Area of Concern)</td>
+                <td colspan="3">adalah temuan yang bersifat ketidaksesuaian minor, yaitu temuan-temuan yang memiliki dampak kecil/terbatas terhadap persyaratan mutu produk/pelayanan dan persyaratan sistem manajemen mutu
+                  Contoh : - ketidaksempurnaan dan ketidakkonsistenan dalam penerapan sistem</td>
+              </tr>
+              <tr>
+                <td>OFI (Opportunity for Improvement)</td>
+                <td colspan="3">adalah temuan yang bukan merupakan ketidaksesuaian yang dimaksudkan untuk penyempurnaan-penyempurnaan</td>
+              </tr>
+              <tr>
+                <td colspan="4">** hanya diisi bila auditor dapat memastikan saran perbaikannya adalah efektif.</td>
+              </tr>
+            </tbody>
+          </tr>
+          <tr>
+            
+          </tr>
+          <tr>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </body>
+</html>

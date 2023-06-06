@@ -1,0 +1,282 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap"
+    rel="stylesheet"
+    />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+    crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <style>
+      /* Styles go here */
+      @media print {
+        * {
+        -webkit-print-color-adjust: exact !important;
+        }
+      }
+      * {
+        font-family: "Mulish", sans-serif;
+      }
+      .section-padding {
+        padding-bottom: 20px;
+      }
+      .table > :not(:last-child) > :last-child > * {
+        border-bottom-color: inherit;
+      }
+      strong {
+        font-weight: 700 !important;
+      }
+      .page-header,
+      .page-header-space {
+        height: 250px;
+      }
+      .page-footer,
+      .page-footer-space {
+        height: 100px;
+      }
+      .page-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      .page-header {
+        position: fixed;
+        top: 0mm;
+        width: 100%;
+      }
+      .page {
+        page-break-after: always;
+      }
+      /* @page {
+        margin: 5cm;
+      } */
+      @media print {
+        body {
+        margin: 0;
+        }
+        table {
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+        thead {
+          display: table-header-group;
+        }
+        tfoot {
+          display: table-footer-group;
+        }   
+      }
+    </style>
+    </head>
+  <body>
+    <table style="padding: 0; margin: 0; width: 100%;">
+      <thead>
+        <tr>
+            <td>
+                <table class="table table-bordered" border="2">
+                    <thead>
+                      <tr>
+                        <th rowspan="4" style="vertical-align: middle;"><center><img src="{{asset('images/logopolines.jpg')}}" alt="logopolines" width="80px" height="80px"/><br>SPMI</center></th>
+                        <th style="vertical-align: middle;"><p class="tulisan">FORMULIR PROSEDUR AKADEMIK</p></th>
+                        <th style="vertical-align: middle;">No</th>
+                        <th style="vertical-align: middle;">{{ $auditReports_->standar }}</th>
+                      </tr>
+                      <tr>
+                        <th rowspan="3" style="vertical-align: middle;"><p class="tulisan">LAPORAN AUDIT MUTU INTERNAL</p></th>
+                        <th>Revisi</th>
+                        <th>3Nothing</th>
+                      </tr>
+                      <tr>
+                        <th>Tanggal</th>
+                        <th>{{ date("d.m.Y", strtotime($auditReports_->jadwalAudit->tglAudit)); }}</th>
+                      </tr>
+                      <tr>
+                        <th>Halaman</th>
+                        <th>
+                            <!-- <div class="footer fixed-section">
+                              <span class="page-number"></span>/
+                              <span class="page-number"></span>Nothing
+                            </div> -->
+                            <!-- <div id="pageNumbers">
+                              <div class="page-number"></div>
+                            </div> -->
+                        </th>
+                      </tr>
+                    </thead>
+                </table>
+ 
+            </td>
+        </tr>
+      </thead>
+      <tbody class="page" style="color: green; font-weight: bold;">
+        <tr>
+            <td>
+                <div>
+                    <center>
+                      <h2>LAPORAN AUDIT MUTU INTERNAL</h2>
+                    </center>
+                      <div class="div">
+                        <div class="row">
+                            <div class="column">
+                              <h4>Auditee :</h4>
+                            </div>
+                            <div class="column">
+                              <h4>Tanda Tangan :</h4>
+                            </div>
+                            <div class="column">
+                              <h4>Tanggal : {{ date("d.m.Y", strtotime($auditReports_->jadwalAudit->tglAudit)); }}</h4>
+                            </div>
+                        </div>
+                        @foreach($auditReports_->jadwalAudit->users as $user)
+                          <div class="row">
+                              @if($user->role_id == 3)
+                                <div class="column">
+                                  <li>{{ $user->name }}</li>
+                                </div>
+                                <div class="column">
+                                  <li>................</li> 
+                                </div>
+                              @endif
+                          </div>
+                        @endforeach
+                      </div>
+                      <div class="div">
+                        <div class="row">
+                          <div class="column">
+                            <h4>Auditor :</h4>
+                          </div>
+                          <div class="column"></div>
+                          <div class="column">
+                            <h4>Halaman : 
+                              <!-- <div id="pageNumbers">
+                                <div class="page-number"></div>
+                              </div> -->
+                            </h4>
+                          </div>
+                        </div>
+                        @foreach($auditReports_->jadwalAudit->users as $user)
+                          <div class="row">
+                              @if($user->role_id == 2)
+                                <div class="column">
+                                  <li>{{ $user->name }}</li>
+                                </div>
+                                <div class="column">
+                                  <li>................</li> 
+                                </div>
+                              @endif
+                          </div>
+                        @endforeach
+                      </div>
+                </div><br>
+          
+                <div>
+                    <table class='table table-bordered' border="2">
+                      <thead>
+                        <tr>
+                          <th style="text-align: center;">No</th>
+                          <th style="text-align: center;">Standar</th>
+                          <th style="text-align: center;">Uraian Temuan</th>
+                          <th style="text-align: center;">Kategori Temuan (NC/AOC/OFI)</th>
+                          <th style="text-align: center;">Saran Perbaikan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                        <tr><td>Main content</td></tr>
+                      </tbody>
+                    </table>
+                </div><br>
+          
+                <div>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td colspan="1">NC (Non-Conformity)</td>
+                          <td colspan="1">adalah temuan yang bersifat ketidaksesuaian mayor, yaitu temuan-temuan yang memiliki dampak 
+                            luas/kritikal terhadap persyaratan mutu produk/pelayanan dan persyaratan sistem manajemen mutu
+                            Contoh : Pelanggaran sistem secara total (sistem tidak dilaksanakan)</td>
+                        </tr>
+                        <tr>
+                          <td colspan="1">AOC (Area of Concern)</td>
+                          <td colspan="1">adalah temuan yang bersifat ketidaksesuaian minor, yaitu temuan-temuan yang memiliki dampak kecil/terbatas terhadap persyaratan mutu produk/pelayanan dan persyaratan sistem manajemen mutu
+                            Contoh : - ketidaksempurnaan dan ketidakkonsistenan dalam penerapan sistem</td>
+                        </tr>
+                        <tr>
+                          <td>OFI (Opportunity for Improvement)</td>
+                          <td colspan="2">adalah temuan yang bukan merupakan ketidaksesuaian yang dimaksudkan untuk penyempurnaan-penyempurnaan</td>
+                        </tr>
+                        <tr>
+                          <td colspan="4">** hanya diisi bila auditor dapat memastikan saran perbaikannya adalah efektif.</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Footer</td></tr>
+      </tfoot>
+    </table>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+      integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+      integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+      crossorigin="anonymous"
+    ></script>
+    </body>
+</html>

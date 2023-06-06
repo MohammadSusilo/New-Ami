@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laporan Audit Mutu Internal</title>
+
+   <style>
+        @page { 
+            margin-left:    1,5cm;
+            margin-right:   1,5cm; 
+            margin-top:     1,5cm;
+            margin-bottom:  1,5cm; 
+        }
+
+        body, body p{
+            font-family:Arial;
+            font-size:11pt;
+            line-height:1.5em;
+        }
+        .default {
+            font-family:Arial;
+            font-size:11pt;
+            line-height:1.5em;
+        }
+        ul{
+            list-style-type:none;
+            padding:0px;
+            margin:0px;
+            line-height:1.5em;
+        }
+
+        li{
+            background-repeat:no-repeat;
+            background-position:0px 5px; 
+            padding-left:14px;
+        }
+
+        p{
+            text-align:justify;
+        }
+        .tabelview{
+            border: 1px solid black;
+        }
+        table {
+          width: 100%;
+            border-collapse: collapse;
+        }
+        td,th {
+		    text-align: left;
+            padding: 1px;
+            word-wrap: break-word;
+            vertical-align:top;
+            font-size:11pt;
+            line-height:1.15em;
+		    /* border:1px solid; */
+        }
+        textarea{
+            text-align: left;
+            word-wrap: break-word;
+            vertical-align:top;
+            font-size:11pt;
+            line-height:1.15em;
+            font-family:Arial;
+            border:none;
+            width:100%;
+            height:auto;
+            text-align:left;
+        }
+        .kodeunit{
+            border:1px solid #000; 
+            float: right;
+            width: 120px;
+            padding-top: 8px;
+            padding-right: 5px;
+            padding-bottom: 8px;
+            padding-left: 5px;
+            text-align: center;
+            font-weight: bold;
+            font-family:Arial;
+            font-size:16pt;
+            line-height:1.5em;
+        }
+
+        .tulisan{
+            text-align: center;
+            font-weight: bold;
+            font-family:Arial;
+            font-size:14pt;
+            line-height:1.5em;
+        }
+        header {
+          position: fixed;
+          top: 0;
+          display: flex;
+          counter-reset: pageTotal;
+        }
+        main {
+          top: 3em;
+          width: 100%;
+          padding-top: 200px;
+          padding-bottom: 50px;
+          counter-increment: pageTotal; 
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .footer .page-number:after { content: counter(page); }
+
+        /* #theader {
+          counter-reset: pageTotal;
+        }
+        #theader main {
+          counter-increment: pageTotal; 
+        } */
+        #pageNumbers {
+          counter-reset: currentPage;
+        }
+        #pageNumbers div:before { 
+          counter-increment: currentPage; 
+          content: counter(page) " / "; 
+        }
+        #pageNumbers div:after { 
+          content: counter(pageTotal); 
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+          float: left;
+          width: 33%;
+          /* padding: 10px;
+          height: 300px; Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        
+   </style>
+  </head>
+<body>
+<!-- <header style="position:fixed">Header</header> -->
+    <header>
+        <table class="table table-bordered" border="2">
+            <thead>
+              <tr>
+                <th rowspan="4" style="vertical-align: middle;"><center><img src="{{asset('images/logopolines.jpg')}}" alt="logopolines" width="80px" height="80px"/><br>SPMI</center></th>
+                <th style="vertical-align: middle;"><p class="tulisan">FORMULIR PROSEDUR AKADEMIK</p></th>
+                <th style="vertical-align: middle;">No</th>
+                <th style="vertical-align: middle;">{{ $auditReports_->standar }}</th>
+              </tr>
+              <tr>
+                <th rowspan="3" style="vertical-align: middle;"><p class="tulisan">LAPORAN AUDIT MUTU INTERNAL</p></th>
+                <th>Revisi</th>
+                <th>3Nothing</th>
+              </tr>
+              <tr>
+                <th>Tanggal</th>
+                <th>{{ date("d.m.Y", strtotime($auditReports_->jadwalAudit->tglAudit)); }}</th>
+              </tr>
+              <tr>
+                <th>Halaman</th>
+                <th>
+                    <!-- <div class="footer fixed-section">
+                      <span class="page-number"></span>/
+                      <span class="page-number"></span>Nothing
+                    </div> -->
+                    <div id="pageNumbers">
+                      <div class="page-number"></div>
+                    </div>
+                </th>
+              </tr>
+            </thead>
+        </table>
+    </header>
+
+    <main>
+
+      <div>
+          <center>
+            <h2>LAPORAN AUDIT MUTU INTERNAL</h2>
+          </center>
+            <!-- @foreach($audits as $jadwal)
+            @if($auditReports_->audit_id == $jadwal->id)           -->
+            <div class="div">
+              <div class="row">
+                  <div class="column">
+                    <h4>Auditee :</h4>
+                  </div>
+                  <div class="column">
+                    <h4>Tanda Tangan :</h4>
+                  </div>
+                  <div class="column">
+                    <h4>Tanggal : {{ date("d.m.Y", strtotime($auditReports_->jadwalAudit->tglAudit)); }}</h4>
+                  </div>
+              </div>
+              </div>
+                @foreach($auditReports_->jadwalAudit->users as $user)
+                  <div class="row">
+                      @if($user->role_id == 3)
+                        <div class="column">
+                          <li>{{ $user->name }}</li>
+                        </div>
+                        <div class="column">
+                          <li>................</li> 
+                        </div>
+                      @endif
+                  </div>
+                @endforeach
+                <!-- @foreach($jadwal->users as $pivot)
+                @if($pivot->pivot->jadwal_id == $jadwal->id)
+                <div class="row">
+                  @foreach($userAudit as $user)
+                    @if($user->role_id == 3)
+                      @if($user->id == $pivot->pivot->user_id)
+                      <div class="column">
+                        <li>{{ $user->name }}</li>
+                      </div>
+                      <div class="column">
+                        <li>................</li> 
+                      </div>
+                      @endif
+                    @endif
+                  @endforeach
+                </div>
+                @endif
+                @endforeach -->
+            </div>
+            <div class="div">
+              <div class="row">
+                <div class="column">
+                  <h4>Auditor :</h4>
+                </div>
+                <div class="column"></div>
+                <div class="column">
+                  <h4>Halaman : 
+                    <div id="pageNumbers">
+                      <div class="page-number"></div>
+                    </div>
+                  </h4>
+                </div>
+              </div>
+            </div>
+              @foreach($auditReports_->jadwalAudit->users as $user)
+                <div class="row">
+                    @if($user->role_id == 2)
+                      <div class="column">
+                        <li>{{ $user->name }}</li>
+                      </div>
+                      <div class="column">
+                        <li>................</li> 
+                      </div>
+                    @endif
+                </div>
+              @endforeach
+                <!-- @foreach($jadwal->users as $pivot)
+                @if($pivot->pivot->jadwal_id == $jadwal->id)
+                <div class="row">
+                  @foreach($userAudit as $user)
+                    @if($user->role_id == 2)
+                      @if($user->id == $pivot->pivot->user_id)
+                      <div class="column">
+                        <li>{{ $user->name }}</li>
+                      </div>
+                      <div class="column">
+                        <li>................</li> 
+                      </div>
+                      @endif
+                    @endif
+                  @endforeach
+                </div>
+                @endif
+                @endforeach
+            @endif
+            @endforeach -->
+      </div><br>
+
+      <div>
+          <table class='table table-bordered' border="2">
+            <thead>
+              <tr>
+                <th style="text-align: center;">No</th>
+                <th style="text-align: center;">Standar</th>
+                <th style="text-align: center;">Uraian Temuan</th>
+                <th style="text-align: center;">Kategori Temuan (NC/AOC/OFI)</th>
+                <th style="text-align: center;">Saran Perbaikan</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($auditReports as $key=>$value)
+                <tr>
+                  <td style="width: 50%; text-align: center">{{ ++ $key }}</td>
+                  <td style="width: 100%; text-align: center">{{ $value->standar }}</td>
+                  <td style="width: 100%">{{ $value->uraianTemuan }}</td>
+                  <td style="width: 100%; text-align: center">{{ $value->kategoriTemuan }}</td>
+                  <td style="width: 100%">{{ $value->saranPerbaikan }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+      </div><br>
+
+      <div>
+          <table>
+            <tbody>
+              <tr>
+                <td colspan="1">NC (Non-Conformity)</td>
+                <td colspan="1">adalah temuan yang bersifat ketidaksesuaian mayor, yaitu temuan-temuan yang memiliki dampak 
+                  luas/kritikal terhadap persyaratan mutu produk/pelayanan dan persyaratan sistem manajemen mutu
+                  Contoh : Pelanggaran sistem secara total (sistem tidak dilaksanakan)</td>
+              </tr>
+              <tr>
+                <td colspan="1">AOC (Area of Concern)</td>
+                <td colspan="1">adalah temuan yang bersifat ketidaksesuaian minor, yaitu temuan-temuan yang memiliki dampak kecil/terbatas terhadap persyaratan mutu produk/pelayanan dan persyaratan sistem manajemen mutu
+                  Contoh : - ketidaksempurnaan dan ketidakkonsistenan dalam penerapan sistem</td>
+              </tr>
+              <tr>
+                <td>OFI (Opportunity for Improvement)</td>
+                <td colspan="2">adalah temuan yang bukan merupakan ketidaksesuaian yang dimaksudkan untuk penyempurnaan-penyempurnaan</td>
+              </tr>
+              <tr>
+                <td colspan="4">** hanya diisi bila auditor dapat memastikan saran perbaikannya adalah efektif.</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      </div>
+      <div class="page_break"></div>
+    </main>
+  
+
+
+    <script type="text/php">
+          if ( isset($pdf) ) { 
+              $pdf->page_script('
+                  if ($PAGE_COUNT > 1) {
+                      $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
+                      $size = 12;
+                      $pageText = "Page " . $PAGE_NUM . " of " . $PAGE_COUNT;
+                      $y = 15;
+                      $x = 520;
+                      $pdf->text($x, $y, $pageText, $font, $size);
+                  } 
+              ');
+          }
+
+    </script> 
+</body>
+</html>

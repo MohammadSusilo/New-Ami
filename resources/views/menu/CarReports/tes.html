@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Report Table</title>
+  <style type="text/css">
+    #outtable {
+      padding: 20px;
+      border: 1px solid #e3e3e3;
+      width: 600px;
+      border-radius: 5px;
+    }
+
+    .short {
+      width: 50px;
+    }
+
+    .normal {
+      width: 150px;
+    }
+
+    table {
+      border-collapse: collapse;
+      font-family: arial;
+      color: #5E5B5C;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 10px;
+    }
+
+    tbody td {
+      border-top: 1px solid #e3e3e3;
+      padding: 10px;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #F6F5FA;
+    }
+
+    tbody tr:hover {
+      background: #EAE9F5
+    }
+
+    .page_break {
+      page-break-before: always;
+    }
+
+    #footer {
+      position: fixed;
+      right: 0px;
+      bottom: 10px;
+      text-align: center;
+      border-top: 1px solid black;
+    }
+
+    #footer .page:after {
+      content: counter(page, decimal);
+    }
+
+    @page {
+      margin: 20px 30px 40px 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- halaman 1 -->
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    #
+                </td>
+                <td>
+                    First Name
+                </td>
+                <td>
+                    Last Name
+                </td>
+                <td>
+                    Email
+                </td>
+            </tr>
+        </thead>
+        <?php $no=1; ?>
+        <?php foreach($users as $user): ?>
+        <tbody>
+            <tr>
+                <td>
+                    <?php echo $no; ?>
+                </td>
+                <td>
+                    <?php echo $user['firstname']; ?>
+                </td>
+                <td>
+                    <?php echo $user['lastname']; ?>
+                </td>
+                <td>
+                    <?php echo $user['email']; ?>
+                </td>
+            </tr>
+        </tbody>
+        <?php $no++; ?>
+        <?php endforeach; ?>
+    </table>
+    <div id="footer">
+        <span class="page">Page </span>
+    </div>
+    <div class="page_break"></div>
+
+     <!-- halaman 2 -->
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    #
+                </td>
+                <td>
+                    First Name
+                </td>
+                <td>
+                    Last Name
+                </td>
+                <td>
+                    Email
+                </td>
+            </tr>
+        </thead>
+        <?php $no=1; ?>
+        <?php foreach($users as $user): ?>
+        <tbody>
+            <tr>
+                <td>
+                    <?php echo $no; ?>
+                </td>
+                <td>
+                    <?php echo $user['firstname']; ?>
+                </td>
+                <td>
+                    <?php echo $user['lastname']; ?>
+                </td>
+                <td>
+                    <?php echo $user['email']; ?>
+                </td>
+            </tr>
+        </tbody>
+        <?php $no++; ?>
+        <?php endforeach; ?>
+    </table>
+    <div id="footer">
+        <span class="page">Page </span>
+    </div>
+</body>
+
+</html>

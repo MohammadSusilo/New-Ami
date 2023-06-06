@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daftar Periksa Audit Mutu Internal</title>
+
+   <style>
+        @page { 
+            margin-left:    1,5cm;
+            margin-right:   1,5cm; 
+            margin-top:     1,5cm;
+            margin-bottom:  1,5cm; 
+        }
+
+        body, body p{
+            font-family:Arial;
+            font-size:11pt;
+            line-height:1.5em;
+        }
+        .default {
+            font-family:Arial;
+            font-size:11pt;
+            line-height:1.5em;
+        }
+        ul{
+            list-style-type:none;
+            padding:0px;
+            margin:0px;
+            line-height:1.5em;
+        }
+
+        li{
+            background-repeat:no-repeat;
+            background-position:0px 5px; 
+            padding-left:14px;
+        }
+
+        p{
+            text-align:justify;
+        }
+        .tabelview{
+            border: 1px solid black;
+        }
+        table {
+          width: 100%;
+            border-collapse: collapse;
+        }
+        td,th {
+		    text-align: left;
+            padding: 1px;
+            word-wrap: break-word;
+            vertical-align:top;
+            font-size:11pt;
+            line-height:1.15em;
+		    /* border:1px solid; */
+        }
+        textarea{
+            text-align: left;
+            word-wrap: break-word;
+            vertical-align:top;
+            font-size:11pt;
+            line-height:1.15em;
+            font-family:Arial;
+            border:none;
+            width:100%;
+            height:auto;
+            text-align:left;
+        }
+        .kodeunit{
+            border:1px solid #000; 
+            float: right;
+            width: 120px;
+            padding-top: 8px;
+            padding-right: 5px;
+            padding-bottom: 8px;
+            padding-left: 5px;
+            text-align: center;
+            font-weight: bold;
+            font-family:Arial;
+            font-size:16pt;
+            line-height:1.5em;
+        }
+
+        .tulisan{
+            text-align: center;
+            font-weight: bold;
+            font-family:Arial;
+            font-size:14pt;
+            line-height:1.5em;
+        }
+        header {
+          position: fixed;
+          top: 0;
+          display: flex;
+          
+        }
+        main {
+          top: 3em;
+          width: 100%;
+          padding-top: 200px;
+          padding-bottom: 50px;
+          counter-reset: pageTotal;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .footer .page-number:after { content: counter(page); }
+
+        /* #theader {
+          counter-reset: pageTotal;
+        }
+        #theader main {
+          counter-increment: pageTotal; 
+        } */
+        #pageNumbers {
+          counter-reset: currentPage;
+        }
+        #pageNumbers div:before { 
+          counter-increment: currentPage; 
+          content: counter(page) " / "; 
+        }
+        #pageNumbers div:after {
+          counter-increment: pageTotal; 
+          content: counter(pageTotal); 
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+          float: left;
+          width: 33%;
+          /* padding: 10px;
+          height: 300px; Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        
+   </style>
+  </head>
+<body>
+<!-- <header style="position:fixed">Header</header> -->
+    <header>
+        <table class="table table-bordered" border="2">
+            <thead>
+              <tr>
+                <th rowspan="4" style="vertical-align: middle;"><center><img src="{{asset('images/logopolines.jpg')}}" alt="logopolines" width="80px" height="80px"/><br>SPMI</center></th>
+                <th style="vertical-align: middle;"><p class="tulisan">FORMULIR PROSEDUR AKADEMIK</p></th>
+                <th style="vertical-align: middle;">No</th>
+                <th style="vertical-align: middle;">{{ $auditReports_->standar }}</th>
+              </tr>
+              <tr>
+                <th rowspan="3" style="vertical-align: middle;"><p class="tulisan">DAFTAR PERIKSA AUDIT MUTU INTERNAL</p></th>
+                <th>Revisi</th>
+                <th>3Nothing</th>
+              </tr>
+              <tr>
+                <th>Tanggal</th>
+                <th>{{ date("d.m.Y", strtotime($auditReports_->jadwalAudit->tglAudit)); }}</th>
+              </tr>
+              <tr>
+                <th>Halaman</th>
+                <th>
+                    <!-- <div class="footer fixed-section">
+                      <span class="page-number"></span>/
+                      <span class="page-number"></span>Nothing
+                    </div> -->
+                    <div id="pageNumbers">
+                      <div class="page-number"></div>
+                    </div>
+                </th>
+              </tr>
+            </thead>
+        </table>
+    </header>
+
+    <main>
+
+      <div>
+          <center>
+            <h2>DAFTAR PERIKSA AUDIT MUTU INTERNAL</h2>
+          </center>
+            <div class="div">
+              <div class="row">
+                  <div class="column">
+                    <h4>Jur./Bag./Unit: 
+                      @foreach ($unitKerja as $unitKerjas)
+                        @if($unitKerjas->id == $auditReports_->jadwalAudit->unitkerja_id)
+                          @foreach ($pengelola as $pengelolas)
+                            @if($pengelolas->id == $unitKerjas->pengelola_id)
+                              {{ $pengelolas->name }}
+                            @endif
+                          @endforeach
+                        @endif
+                      @endforeach
+                    </h4>
+                  </div>
+                  <div class="column"></div>
+                  <div class="column">
+                    <h4>Tahun: {{ $auditReports_->jadwalAudit->tahun }}</h4>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="column">
+                    <h4>Prodi/Sub : 
+                      @foreach ($unitKerja as $unitKerjas)
+                        @if($unitKerjas->id == $auditReports_->jadwalAudit->unitkerja_id)
+                          {{ $unitKerjas->name }}
+                        @endif
+                      @endforeach
+                    </h4>
+                  </div>
+                  <div class="column"></div>
+                  <div class="column">
+                    <h4>Periode ke : {{ $auditReports_->jadwalAudit->periode }}</h4>
+                  </div>
+              </div>
+              @foreach($auditReports_->jadwalAudit->users as $user)
+                <div class="row">
+
+                    @if($user->role_id == 2)
+                      <div class="column">
+                        <h4>Auditor : </h4>
+                        <li>{{ $user->name }}</li>
+                      </div>
+                    @endif
+                </div>
+              @endforeach
+            </div>
+            </div>
+      </div><br>
+
+      <div>
+          <table class='table table-bordered' border="2">
+            <thead>
+              <tr>
+                <th style="text-align: center;">No</th>
+                <th style="text-align: center;">Standar</th>
+                <th style="text-align: center;">Pertanyaan</th>
+                <th style="text-align: center;">Hasil Observasi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($auditReports as $key=>$value)
+                <tr>
+                  <td style="width: 50%; text-align: center">{{ ++ $key }}</td>
+                  <td style="width: 100%; text-align: center">{{ $value->standar }}</td>
+                  <td style="width: 100%"></td>
+                  <td style="width: 100%; text-align: center"></td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+      </div><br>
+      
+      <div class="page_break"></div>
+    </main>
+  
+
+
+    <script type="text/php">
+      if ( isset($pdf) ) { 
+          $pdf->page_script('
+              if ($PAGE_COUNT > 1) {
+                  $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
+                  $size = 12;
+                  $pageText = "Page " . $PAGE_NUM . " of " . $PAGE_COUNT;
+                  $y = 15;
+                  $x = 520;
+                  $pdf->text($x, $y, $pageText, $font, $size);
+              } 
+          ');
+      }
+    </script> 
+</body>
+</html>
