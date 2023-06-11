@@ -96,7 +96,9 @@ class DokumenPolines extends Controller
      */
     public function edit($id)
     {
-        //
+        $dokPolines = ModelsDokumenPolines::findOrFail($id);
+        $unitKerja = unitKerjas::all();
+        return view('menu.dokumenPolines.edit', compact('dokPolines', 'unitKerja'));
     }
 
     /**
@@ -108,7 +110,23 @@ class DokumenPolines extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid = [
+            'unitkerja_id' => 'required',
+        ];
+
+        $request->validate($valid);
+
+        try {
+            $update = ModelsDokumenPolines::findOrFail($id);
+            
+            $update->update([
+                'unitkerja_id'=>$request->unitkerja_id,
+            ]);
+
+            return redirect('RencanaStrategisRencanaOperasional')->with('success', 'Dokumen Polines berhasil diubah');
+        } catch (Exception $exc) {
+            abort(404, $exc->getMessage());
+        }
     }
 
     /**
