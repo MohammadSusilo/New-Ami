@@ -102,6 +102,8 @@ use App\Models\User;
 
                 //DOKUMEN POLINES
                 Route::resource('dokumenPolines', DokumenPolines::class);
+                Route::post('dokumenPolines/post/multi', [DokumenPolines::class, 'StoreMulti'])->name('dokumenPolines.saveMulti');
+
 
                 //RENSTRA
                 Route::resource('renstra', renstra::class);

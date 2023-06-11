@@ -294,7 +294,7 @@ class dokumen extends Controller
 
     public function dokChecklistSaveMulti(Request $request)
     {
-        // dd($request);
+        dd($request);
         try {
             foreach ($request->addmore as $key => $value) {
                 if ($value['name'] != null){

@@ -197,6 +197,7 @@
     @stack('jsrenop')
     @stack('jskinerjaUnit')
     @stack('jsbuktiKinerja')
+    @stack('jsdokPolines')
     
     <script>
         $(document).ready(function () {

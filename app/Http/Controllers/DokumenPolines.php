@@ -58,6 +58,25 @@ class DokumenPolines extends Controller
         }
     }
 
+    public function StoreMulti(Request $request)
+    {
+        try {
+            foreach ($request->addmore as $key => $value) {
+                if ($value['unitkerja_id'] != null) {
+                    ModelsDokumenPolines::create([
+                        'unitkerja_id' => $value['unitkerja_id'],
+                    ]);
+                } else {
+                    return back()->with('error', 'Unit Kerja wajib di isi, Dokumen Polines gagal ditambah');
+                }
+            }
+
+            return back()->with('success', 'Kinerja Unit berhasil ditambah');
+        } catch (Exception $exc) {
+            abort(404, $exc->getMessage());
+        }
+    }
+
     /**
      * Display the specified resource.
      *
