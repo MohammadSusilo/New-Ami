@@ -13,7 +13,7 @@ use App\Models\kinerjaUnit;
 use App\Models\buktiKinerja;
 use App\Models\dokumenInduk;
 use App\Models\dokumenChecklist;
-
+use App\Models\DokumenPolines;
 //Second Model
 use App\Models\unitKerjas;
 use App\Models\jadwalAudit;
@@ -202,7 +202,9 @@ class renstraRenop extends Controller
 
             $unitKerja = unitKerjas::all();
 
-            return view('menu.renstraRenop', compact('renstra', 'dokAcuans', 'renop', 'kinerja', 'bukti', 'dokInduk', 'dokCheck', 'unitKerja', 'dadakanrenop', 'dadakankinerja'));
+            $dokPolines = DokumenPolines::all();
+
+            return view('menu.renstraRenop', compact('renstra', 'dokAcuans', 'renop', 'kinerja', 'bukti', 'dokInduk', 'dokCheck', 'unitKerja', 'dadakanrenop', 'dadakankinerja' , 'dokPolines'));
             
         }catch (Exception $exc) {
             abort(404, $exc->getMessage());
