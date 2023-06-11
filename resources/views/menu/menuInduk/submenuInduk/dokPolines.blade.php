@@ -1,5 +1,5 @@
     @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
-    <a href="{{ route('dokumen.checklist') }}" class="btn btn-app">
+    <a href="{{ route('dokumenPolines.create') }}" class="btn btn-app">
       <i class="fas fa-plus"></i> New
     </a>
     <!-- <a href="#" id="MultidokChecklistRecordplus" class="btn btn-app ">
@@ -10,13 +10,14 @@
     </button>
     @endif
 
-    <p align="right">
+    <!-- Histori -->
+    <!-- <p align="right">
         <a href="{{ url('dokChecklisthistory/history')}}">
             <button class="button btn btn-link btn-outline-default is-small is-danger" data-toggle="tooltip" data-original-title="Ubah Pengguna">
                 <i class="fa fa-history"></i> History
             </button>
         </a>
-    </p>
+    </p> -->
 
    
     <!-- Multi Dokumen -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DokumenPolines as ModelsDokumenPolines;
+use App\Models\unitKerjas;
 use Illuminate\Http\Request;
 
 class DokumenPolines extends Controller
@@ -24,7 +25,12 @@ class DokumenPolines extends Controller
      */
     public function create()
     {
-        //
+        try {
+            $unitKerja = unitKerjas::all();
+            return view('menu.dokumenPolines.create', compact('unitKerja'));
+        } catch (Exception $exc) {
+            abort(404, $exc->getMessage());
+        }
     }
 
     /**
@@ -35,7 +41,21 @@ class DokumenPolines extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = [
+            'unitkerja_id' => 'required',
+        ];
+
+        $request->validate($valid);
+
+        try {
+            ModelsDokumenPolines::create([
+                'unitkerja_id' => $request->unitkerja_id,
+            ]);
+
+            return redirect('RencanaStrategisRencanaOperasional')->with('success', 'Dokumen Polines berhasil ditambah');
+        } catch (Exception $exc) {
+            abort(404, $exc->getMessage());
+        }
     }
 
     /**
