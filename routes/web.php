@@ -49,8 +49,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\FAQsController;
 use App\Http\Controllers\BackupController;
-
-
+use App\Http\Controllers\DokumenPolines;
 use App\Http\Controllers\menu\dokumenChecklist;
 use App\Models\User;
 
@@ -100,6 +99,9 @@ use App\Models\User;
 
             //DOKUMEN UMUM & RENCANA STRATEGIS
             Route::get('RencanaStrategisRencanaOperasional', [renstraRenop::class, 'index'])->name('renstraRenop.index');
+
+                //DOKUMEN POLINES
+                Route::resource('dokumenPolines', DokumenPolines::class);
 
                 //RENSTRA
                 Route::resource('renstra', renstra::class);
