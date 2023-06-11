@@ -84,6 +84,9 @@
                     <!--<a class="nav-link" id="buktiKinerja-tab" data-toggle="pill" href="#buktiKinerja" role="tab" aria-controls="buktiKinerja" aria-selected="false">Bukti Kinerja</a>-->
                     <a class="nav-link" data-toggle="tab" role="tab" href="#buktiKinerja" data-target="#buktiKinerja" aria-controls="buktiKinerja" aria-selected="true">Bukti Kinerja</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" role="tab" href="#dokumenPolines" data-target="#dokumenPolines" aria-controls="dokumenPolines" aria-selected="true">Dokumen Polines</a>
+                  </li>
                 </ul>
               </div>
               <div class="card-body">
@@ -136,7 +139,11 @@
                     @include('menu.menuInduk.submenuInduk.buktiKinerja')
                   </div>
 
- 
+                  <!-- Dokumen Polines -->
+                  <div id="dokumenPolines" class="tab-pane fade show" role="tabpanel">
+                    @include('menu.menuInduk.submenuInduk.dokPolines')
+                  </div>
+
                 </div>
                 <!-- /.card body -->    
               </div>
