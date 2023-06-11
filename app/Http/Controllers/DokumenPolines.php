@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DokumenPolines as ModelsDokumenPolines;
 use Illuminate\Http\Request;
 
 class DokumenPolines extends Controller
@@ -79,6 +80,15 @@ class DokumenPolines extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            $data = ModelsDokumenPolines::findOrFail($id);
+            // File::delete($data->lokasi);
+            $data->delete();
+
+            return redirect()->back()->with('success', 'Dokumen Polines berhasil dihapus');
+        } catch (Exception $exc) {
+            abort(404, $exc->getMessage());
+        }
     }
 }
