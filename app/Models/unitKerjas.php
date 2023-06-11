@@ -59,6 +59,6 @@ class unitKerjas extends Model
 
     public function DokumenPolines()
     {
-        return $this->hasMany(DokumenPolines::class);
+        return $this->hasMany(DokumenPolines::class , 'unitkerja_id');
     }
 }
