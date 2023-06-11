@@ -26,6 +26,7 @@ use App\Models\laporanAudit;
 //Tinjauan Manajemen
 use App\Models\hasilRapatTM;
 use App\Models\bahanRapatTM;
+use App\Models\DokumenPolines;
 use App\Models\tindakLanjutTM;
 use App\Models\tinjauanManajemen;
 

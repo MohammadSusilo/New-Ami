@@ -11,9 +11,9 @@ class unitKerjas extends Model
 
     protected $table = "unitkerja";
     protected $fillable = [
-        'name', 
-        'namaRepo', 
-        'status', 
+        'name',
+        'namaRepo',
+        'status',
         'pengelola_id',
     ];
 
@@ -55,5 +55,10 @@ class unitKerjas extends Model
     public function LAMTeknikLEDPendahuluan()
     {
         return $this->hasMany('App\Models\SPME\LAMTeknik\LED\LAMTeknikLEDPendahuluan');
+    }
+
+    public function DokumenPolines()
+    {
+        return $this->hasMany(DokumenPolines::class);
     }
 }
